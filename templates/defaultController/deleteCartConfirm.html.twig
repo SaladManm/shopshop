@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Supprimer le Panier{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h2>Êtes-vous sûr de vouloir supprimer ce panier ?</h2>
+    <form method="POST" action="index.php?page=cart.delete&id={{ cart.id_cart }}">
+        <button type="submit" class="btn btn-danger">Supprimer</button>
+        <a href="index.php?page=cart.list" class="btn btn-secondary">Annuler</a>
+    </form>
+</div>
+{% endblock %}

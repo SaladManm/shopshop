@@ -1,0 +1,38 @@
+{% extends "base.html.twig" %}
+
+{% block title %} {{ parent() }} Commandes {% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <h1 class="text-center">Liste des Commandes</h1>
+            <table class="table table-bordered table-hover">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>ID Commande</th>
+                        <th>Date Commande</th>
+                        <th>ID Utilisateur</th>
+                        <th>Statut</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for order in orders %}
+                    <tr>
+                        <td>{{ order.id }}</td>
+                        <td>{{ order.getOrderDate()|date("d/m/Y") }}</td>
+                        <td>{{ order.getUserId() }}</td>
+                        <td>{{ order.getStatus() }}</td>
+                        <td>
+                            <a href="index.php?page=updateOrder&id={{ order.getId() }}" class="btn btn-sm btn-primary">Modifier</a>
+                            <a href="index.php?page=deleteOrder&id={{ order.getId() }}" class="btn btn-sm btn-danger">Supprimer</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}

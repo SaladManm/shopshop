@@ -1,0 +1,38 @@
+{% extends "base.html.twig" %}
+
+{% block title %} {{ parent() }} Produits dans le Panier {% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="row justify-content-center">
+        <div class="col-12 col-md-10">
+            <h1 class="text-center">Produits dans le Panier</h1> 
+
+            {% if products is not empty %}
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Nom du Produit</th>
+                            <th>Description</th>
+                            <th>Quantité</th>
+                            <th>Prix</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for product in products %}
+                            <tr>
+                                <td>{{ product.name }}</td>
+                                <td>{{ product.description | raw}}</td>
+                                <td>{{ product.quantity }}</td>
+                                <td>{{ product.price }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            {% else %}
+                <p>Pas de produits dans le panier.</p>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

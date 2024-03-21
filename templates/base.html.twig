@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    {% block css %}
+			<!-- Bootstrap CSS -->
+			<link href="https://bootswatch.com/5/quartz/bootstrap.rtl.min.css" rel="stylesheet">
+			<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css">
+		{% endblock %}
+    <title>
+        {% block title %}ShopShop | {% endblock %}
+    </title>
+</head>
+<body class="bg-white">
+    <nav class="navbar navbar-expand-lg bg-primary" data-bs-theme="dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="index.php">Navbar</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarColor01">
+                {%if session.login is defined %}
+                    {%if 'admin' in session.roles %}
+                        <ul class="navbar-nav me-auto">
+                            <li class="nav-item">
+                                <a class="nav-link active" href="index.php">Home
+                                    <span class="visually-hidden">(current)</span>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="index.php?page=contact">Contact</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="index.php?page=produit">Produit</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="index.php?page=types">Types</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="index.php?page=addType">Ajouter Type</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="index.php?page=user">Utilisateurs</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="index.php?page=addUser">Ajouter Utilisateur</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="index.php?page=orders">Commandes</a>
+                            </li>
+                            
+                        </ul>
+                    {% else %}
+                        <ul class="navbar-nav me-auto">
+                            <li class="nav-item">
+                                <a class="nav-link active" href="index.php">Home
+                                    <span class="visually-hidden">(current)</span>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="index.php?page=contact">Contact</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="index.php?page=produit">Produit</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="index.php?page=types">Types</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="index.php?page=myCart">Mon Panier</a>
+                            </li>
+
+                        </ul>
+                    {% endif %}
+                {% endif %}
+
+                {% if session.login is defined %}
+                    <ul class="navbar-nav">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">{{ session.login }}</a>
+                            <div class="dropdown-menu">
+                                <a class="dropdown-item" href="index.php?page=logout">Se déconnecter</a>
+                            </div>
+                        </li>
+                    </ul>
+                {% else %}
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link" href="index.php?page=login">Se connecter</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="index.php?page=addUser">Inscription</a>
+                        </li>
+                    </ul>
+                {% endif %}
+
+            </div>
+        </div>
+    </nav>
+    <div class="container mt-4">
+        {% if session.message %}
+            <div class="alert alert-danger text-center">{{ session.message }}{{ clear_session_message() }}</div>
+        {% endif %}
+        {% block content %}{% endblock %}
+    </div>
+    {% block js %}
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    {% endblock %}
+</body>
+</html>

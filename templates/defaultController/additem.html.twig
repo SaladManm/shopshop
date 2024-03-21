@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Ajouter un article{% endblock %}
+
+{% block content %}
+<h1>Ajouter un article au panier</h1>
+<form action="" method="POST">
+    <div>
+        <label for="cartId">Choisir un panier :</label>
+        <select name="cartId" id="cartId">
+            {% for cart in carts %}
+            <option value="{{ cart.id_cart }}">{{ cart.id_cart }} - {{ cart.creationdate }}</option>
+            {% endfor %}
+        </select>
+    </div>
+    <div>
+        <label for="productId">Choisir un produit :</label>
+        <select name="productId" id="productId">
+            {% for product in products %}
+            <option value="{{ product.ProductId }}">{{ product.name }} - {{ product.price }}</option>
+            {% endfor %}
+        </select>
+    </div>
+    <div>
+        <label for="quantity">Quantité :</label>
+        <input type="number" id="quantity" name="quantity" value="1">
+    </div>
+    <div>
+        <button type="submit">Ajouter au panier</button>
+    </div>
+</form>
+{% endblock %}

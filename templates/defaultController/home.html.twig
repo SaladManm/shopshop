@@ -1,0 +1,19 @@
+{% extends "base.html.twig" %}
+
+{% block title %} {{ parent() }} Accueil {% endblock %}
+       
+{% block content %} 
+<div class="container-fluid">
+    <div class="row justify-content-center">
+        <div class="col-12 col-md-10">
+            <h1 class="text-center">Site fonctionnel</h1> 
+
+            <ul>
+                {% for type in types %}
+                <li><a href="index.php?page=productType&id={{ type.id }}">{{ type.label }}</a></li>
+            {% endfor %}            
+            </ul>
+        </div>
+    </div>
+</div>
+{% endblock %}

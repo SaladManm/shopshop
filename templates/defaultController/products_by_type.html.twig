@@ -1,0 +1,16 @@
+{% extends "base.html.twig" %}
+
+{% block title %}
+    Produits par Type
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <h1>Produits par Type</h1>
+        <ul>
+            {% for product in products %}
+                <li>{{ product.name }} - {{ product.price }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+{% endblock %}

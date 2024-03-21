@@ -1,0 +1,46 @@
+{% extends "base.html.twig" %}
+
+{% block title %}
+    {{ parent() }}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="row justify-content-center">
+        <div class="col-12 col-md-10">
+            <h1 class="text-center">Liste des Paniers</h1>
+            <div class="mb-3"></div>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Date de création</th>
+                        <th>Status</th>
+                        <th>ID Utilisateur</th>
+                        <th>Nombre de produits</th>
+                        <th>Prix total</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for cart in carts %}
+                    <tr>
+                        <td>{{ cart.id_cart }}</td>
+                        <td>{{ cart.creationdate }}</td>
+                        <td>{{ cart.status }}</td>
+                        <td>{{ cart.id_user }}</td>
+                        <td>{{ cart.product_count }}</td>
+                        <td>{{ cart.total_price is defined ? cart.total_price|number_format(2, '.', ',') ~ ' €' : '0,00 €' }}</td>
+                        <td>
+                            <a href="index.php?page=updateCart&id={{ cart.id_cart }}" title="Modifier"><i class="bi bi-pen-fill"></i></a>
+                            <a href="index.php?page=deleteCartConfirm&id={{ cart.id_cart }}" title="Supprimer" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce panier ?');"><i class="bi bi-trash2-fill"></i></a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}

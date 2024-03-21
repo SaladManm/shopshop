@@ -1,0 +1,33 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Modifier le Panier{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h2>Modifier le Panier</h2>
+    {% if errors is defined and errors|length > 0 %}
+    <div class="alert alert-danger" role="alert">
+        <ul>
+            {% for error in errors %}
+                <li>{{ error }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+    {% endif %}
+    <form method="POST" action="index.php?page=updateCart&id={{ cart.id_cart }}">
+        <div class="mb-3">
+            <label for="status" class="form-label">Statut</label>
+            <select id="status" name="status" class="form-control">
+                <option value="active" {% if cart.status == 'active' %}selected{% endif %}>Actif</option>
+                <option value="inactive" {% if cart.status == 'inactive' %}selected{% endif %}>Inactif</option>
+            </select>
+        </div>
+        <div class="mb-3">
+            <label for="userId" class="form-label">ID Utilisateur</label>
+            <input type="text" class="form-control" id="userId" name="userId" value="{{ cart.userId }}" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Mettre à jour</button>
+        <a href="index.php?page=cart.list" class="btn btn-secondary">Annuler</a>
+    </form>
+</div>
+{% endblock %}

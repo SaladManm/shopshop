@@ -1,0 +1,37 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Avis sur {{ product.name }}{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h2>Avis sur {{ product.name }}</h2>
+    {% if reviews|length > 0 %}
+    <ul>
+        {% for review in reviews %}
+        <li>
+            <strong>Note :</strong>
+            {% set rating = review.rating %}
+            {% set fullStars = rating|round(0, 'floor') %}
+            {% set halfStar = rating - fullStars >= 0.5 ? 1 : 0 %}
+            {% set emptyStars = 5 - fullStars - halfStar %}
+            {% for i in 1..fullStars %}
+                <i class="bi bi-star-fill"></i>
+            {% endfor %}
+            {% if halfStar %}
+                <i class="bi bi-star-half"></i>
+            {% endif %}
+            {% for i in 1..emptyStars %}
+                <i class="bi bi-star"></i>
+            {% endfor %}
+            ,
+            <strong>Commentaire :</strong> {{ review.comment }},
+            <strong>Par :</strong> Adrien le {{ review.createdAt|date("d/m/Y") }}
+        </li>
+        {% endfor %}
+    </ul>
+    {% else %}
+    <p>Aucun avis pour ce produit.</p>
+    {% endif %}
+    <a href="index.php?page=produit">Retour aux produits</a>
+</div>
+{% endblock %}

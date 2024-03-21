@@ -1,0 +1,99 @@
+{% extends "base.html.twig" %}
+
+{% block title %}
+    {{ parent() }}
+    Profil de l'utilisateur
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+            <h1 class="text-center">Profil de l'utilisateur</h1>
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Informations personnelles</h5>
+                    <table class="table">
+                        <tbody>
+                            <tr>
+                                <th scope="row">Nom</th>
+                                <td>{{ user.lastName }}</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Prénom</th>
+                                <td>{{ user.firstName }}</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Email</th>
+                                <td>{{ user.email }}</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Adresse</th>
+                                <td>{{ user.address }}</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Code postal</th>
+                                <td>{{ user.postalCode }}</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Ville</th>
+                                <td>{{ user.city }}</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Téléphone</th>
+                                <td>{{ user.phone }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            
+            <div class="card mt-4">
+                <div class="card-body">
+                    <h5 class="card-title">Historique des commandes</h5>
+                    {% if orders is not empty %}
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">ID Commande</th>
+                                <th scope="col">Date</th>
+                                <th scope="col">Montant total</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for order in orders %}
+                                <tr>
+                                    <td>{{ order.id_order }}</td>
+                                    <td>{{ order.orderdate }}</td>
+                                    <td>{{ order.totalamount }}</td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>                                     
+                    {% else %}
+                        <p>Aucune commande passée.</p>
+                    {% endif %}
+                </div>
+            </div>
+
+            <form method="post" action="index.php?page=updatePassword">
+                <h3 class="mt-4">Changer votre mot de passe</h3>
+                <div>
+                    <label for="oldPassword">Ancien mot de passe :</label>
+                    <input type="password" id="oldPassword" name="oldPassword" required>
+                </div>
+                <div>
+                    <label for="newPassword">Nouveau mot de passe :</label>
+                    <input type="password" id="newPassword" name="newPassword" required>
+                </div>
+                <div>
+                    <label for="confirmPassword">Confirmez le nouveau mot de passe :</label>
+                    <input type="password" id="confirmPassword" name="confirmPassword" required>
+                </div>
+                <button type="submit">Changer le mot de passe</button>
+            </form>
+            
+        </div>
+    </div>
+</div>
+{% endblock %}

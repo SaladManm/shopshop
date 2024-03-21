@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block content %}
+<h2>Créer un Panier</h2>
+<form action="{{ path_to_your_controller_route }}" method="post">
+    <div class="form-group">
+        <label for="userId">Sélectionner un Utilisateur</label>
+        <select id="userId" name="userId" class="form-control">
+            {% for user in users %}
+            <option value="{{ user.id }}">{{ user.email }} - {{ user.firstName }} {{ user.lastName }}</option>
+            {% endfor %}
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="status">Statut du Panier</label>
+        <select id="status" name="status" class="form-control">
+            <option value="active">Actif</option>
+            <option value="pending">En attente</option>
+        </select>
+    </div>
+    <button type="submit" class="btn btn-primary">Créer le Panier</button>
+</form>
+{% endblock %}

@@ -1,0 +1,31 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Ajouter un avis{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h2>Ajouter un avis sur le produit {{ product.name }}</h2>
+    <form action="index.php?page=submitReview" method="POST">
+        <input type="hidden" name="product_id" value="{{ product.id }}">
+        <div class="mb-3">
+            <label for="rating" class="form-label">Note</label>
+            <select name="rating" id="rating" class="form-control">
+                <option value="1">1</option>
+                <option value="1.5">1.5</option>
+                <option value="2">2</option>
+                <option value="2.5">2.5</option>
+                <option value="3">3</option>
+                <option value="3.5">3.5</option>
+                <option value="4">4</option>
+                <option value="4.5">4.5</option>
+                <option value="5">5</option>
+            </select>
+        </div>
+        <div class="mb-3">
+            <label for="comment" class="form-label">Commentaire</label>
+            <textarea name="comment" id="comment" rows="4" class="form-control"></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Soumettre l'avis</button>
+    </form>
+</div>
+{% endblock %}
