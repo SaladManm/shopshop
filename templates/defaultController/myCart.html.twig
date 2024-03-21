@@ -24,7 +24,10 @@
                                     <tr>
                                         <td>{{ cart.created_at|date("Y-m-d H:i:s") }}</td>
                                         <td>{{ cart.status }}</td>
-                                        <td><a href="index.php?page=cartProducts&id={{ cart.id_cart }}">🔍</a></td>
+                                        <td>
+                                            <a href="index.php?page=cartProducts&id={{ cart.id_cart }}">🔍</a>
+                                            <a href="index.php?page=validateCart&id={{ cart.id_cart }}">✔</a>
+                                        </td>
                                     </tr>
                                 {% endfor %}
                             </tbody>
